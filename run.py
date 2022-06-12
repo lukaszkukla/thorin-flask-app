@@ -1,7 +1,8 @@
+from crypt import methods
 from dataclasses import dataclass
 import os
 import json
-from flask import Flask, render_template, render_template_string
+from flask import Flask, render_template, render_template_string, request
 
 app = Flask(__name__)
 
@@ -28,10 +29,11 @@ def about_member(member_name):
                 member = obj
     return render_template('member.html', member=member)
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    if request.method == 'POST':
+        print('hello')
     return render_template('contact.html', page_title='Contact')
-
 
 @app.route('/careers')
 def careers():
