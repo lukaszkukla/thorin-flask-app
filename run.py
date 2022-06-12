@@ -18,7 +18,7 @@ def about():
         data = json.load(json_data)
     return render_template('about.html', page_title='About', company=data)
 
-@app.route('about/<member_name>')
+@app.route('/about/<member_name>')
 def about_member(member_name):
     member = {}
     with open('data/company.json', 'r') as json_data:
@@ -26,9 +26,7 @@ def about_member(member_name):
         for obj in data:
             if obj['url']  == member_name:
                 member = obj
-    return '<h1>' + member['name'] + '</h1>'
-
-
+    return render_template('member.html', member=member)
 
 @app.route('/contact')
 def contact():
